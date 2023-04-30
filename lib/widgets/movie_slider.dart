@@ -86,32 +86,34 @@ class _MoviePoster extends StatelessWidget {
       width: 130,
       height: 190,
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () => Navigator.pushNamed(context, 'details', arguments: movie),
-            child: Hero(
-              tag: movie.heroId!,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: FadeInImage(
-                  placeholder: const AssetImage('assets/no-image.jpg'), 
-                  image: NetworkImage(movie.fullPosterImg),
-                  height: 190,
-                  width: 130,
-                  fit: BoxFit.cover
+      child: Expanded(
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () => Navigator.pushNamed(context, 'details', arguments: movie),
+              child: Hero(
+                tag: movie.heroId!,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: FadeInImage(
+                    placeholder: const AssetImage('assets/no-image.jpg'), 
+                    image: NetworkImage(movie.fullPosterImg),
+                    height: 190,
+                    width: 130,
+                    fit: BoxFit.cover
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 5,),
-          Text(
-            movie.originalTitle,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-          )
-        ]
+            const SizedBox(height: 5,),
+            Text(
+              movie.originalTitle,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            )
+          ]
+        ),
       ),
     );
   }

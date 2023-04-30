@@ -30,7 +30,7 @@ class CastingCards extends StatelessWidget {
           width: double.infinity,
           height: 180,
           child: ListView.builder(
-            itemCount: 10,
+            itemCount: cast.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (_, int index) => _CastCard(actor: cast[index])
           ),
@@ -51,25 +51,31 @@ class _CastCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10),
       margin: const EdgeInsets.symmetric(horizontal: 10),
       width: 110,
-      height: 100,
+      height: 150,
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(
-              placeholder: const AssetImage('assets/no-image.jpg'),
-              image: NetworkImage(actor.fullProfilePath),
-              height: 140,
-              width: 100,
-              fit: BoxFit.cover
-            )
+          Expanded(
+            flex: 3,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(actor.fullProfilePath),
+                height: 140,
+                width: 100,
+                fit: BoxFit.cover
+              )
+            ),
           ),
           const SizedBox(height: 5,),
-          Text(
-            actor.name,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
+          Expanded(
+            flex: 1,
+            child: Text(
+              actor.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
           )
         ]
       ),
