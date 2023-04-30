@@ -56,7 +56,10 @@ class MovieSearchDelegate extends SearchDelegate {
 
         return ListView.builder(
           itemCount: movies.length,
-          itemBuilder: (_, int index) => _MovieItem(movie: movies[index],)
+          itemBuilder: (_, int index) => _MovieItem(
+            movie: movies[index],
+            heroId: '${movies[index].title}-${index}-${movies[index].id}',
+          )
         );
       }
     );  
@@ -65,16 +68,21 @@ class MovieSearchDelegate extends SearchDelegate {
 
 class _MovieItem extends StatelessWidget {
   final Movie movie;
-  const _MovieItem({super.key, required this.movie});
+  final String heroId;
+  const _MovieItem({super.key, required this.movie, required this.heroId});
 
   @override
   Widget build(BuildContext context) {
+    movie.heroId = heroId;
     return ListTile(
-      leading: FadeInImage(
-        placeholder: const AssetImage('assets/no-image.jpg'),
-        image: NetworkImage(movie.fullPosterImg),
-        width: 50,
-        fit: BoxFit.contain
+      leading: Hero(
+        tag: movie.heroId!,
+        child: FadeInImage(
+          placeholder: const AssetImage('assets/no-image.jpg'),
+          image: NetworkImage(movie.fullPosterImg),
+          width: 50,
+          fit: BoxFit.contain
+        ),
       ),
       title: Text(movie.title),
       subtitle: Text(movie.originalTitle),
