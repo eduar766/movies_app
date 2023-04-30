@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/models/models.dart';
+import 'package:movies_app/models/search_movie_response.dart';
 
 class MoviesProvider extends ChangeNotifier{
   final String _apiKey = '73e9d3da8f2da01f1f08152ca5b70fbf';
   final String _baseUrl = 'api.themoviedb.org';
-  final String _lenguage = 'es-Es';
+  final String _lenguage = 'es-ES';
 
   List<Movie> onDisplayMovies = [];
   List<Movie> popularMovies = [];
@@ -21,7 +22,7 @@ class MoviesProvider extends ChangeNotifier{
   }
 
   Future<String> _getJsonData(String endpoint, [int page = 1]) async {
-    var url = Uri.https(_baseUrl, endpoint, {
+    final url = Uri.https(_baseUrl, endpoint, {
       'api_key': _apiKey,
       'lenguage': _lenguage,
       'page': '$page'
@@ -55,4 +56,18 @@ class MoviesProvider extends ChangeNotifier{
     moviesCast[movieId] = creditsResponse.cast;
     return creditsResponse.cast;
   }
+
+  Future<List<Movie>> searchMovies(String query) async {
+    final url = Uri.https(_baseUrl, '3/search/movie', {
+      'api_key': _apiKey,
+      'lenguage': _lenguage,
+      'query': query
+    });
+
+    final response = await http.get(url);
+    final searchResponse = SearchMovieResponse.fromRawJson(response.body);
+
+    return searchResponse.results;
+  }
+
 }
