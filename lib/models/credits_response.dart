@@ -29,7 +29,6 @@ class Cast {
     bool adult;
     int gender;
     int id;
-    Department knownForDepartment;
     String name;
     String originalName;
     double popularity;
@@ -38,7 +37,6 @@ class Cast {
     String? character;
     String creditId;
     int? order;
-    Department? department;
     String? job;
 
     get fullProfilePath {
@@ -53,7 +51,6 @@ class Cast {
         required this.adult,
         required this.gender,
         required this.id,
-        required this.knownForDepartment,
         required this.name,
         required this.originalName,
         required this.popularity,
@@ -62,7 +59,6 @@ class Cast {
         this.character,
         required this.creditId,
         this.order,
-        this.department,
         this.job,
     });
 
@@ -72,7 +68,6 @@ class Cast {
         adult: json["adult"],
         gender: json["gender"],
         id: json["id"],
-        knownForDepartment: departmentValues.map[json["known_for_department"]]!,
         name: json["name"],
         originalName: json["original_name"],
         popularity: json["popularity"]?.toDouble(),
@@ -81,7 +76,6 @@ class Cast {
         character: json["character"],
         creditId: json["credit_id"],
         order: json["order"],
-        department: departmentValues.map[json["department"]]!,
         job: json["job"],
     );
 }
