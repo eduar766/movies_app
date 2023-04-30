@@ -94,6 +94,7 @@ class _PosterAndTitle extends StatelessWidget {
               children: [
                 Text(movie.title, style: textTheme.headlineSmall, overflow: TextOverflow.ellipsis, maxLines: 2,),
                 Text(movie.originalTitle, style: textTheme.titleSmall, overflow: TextOverflow.ellipsis, maxLines: 2,),
+                Text('Publicacion: ${movie.releaseDate}', style: textTheme.titleSmall, overflow: TextOverflow.ellipsis, maxLines: 2,),
                 Row(
                   children: [
                     const Icon(Icons.star_outline, size: 15, color: Colors.grey,),
